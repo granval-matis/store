@@ -6,7 +6,7 @@ body {
     background-color: #303030;
     padding: 80px;
 }
-a:not(:has(img)), a img, button, input, .style_button  {
+a:not(:has(img)), a img, button, input, .style_button {
     display: inline-block;
     padding: 16px 16px;
     border-radius: 20px;
