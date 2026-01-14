@@ -4,4 +4,5 @@ class Product < ApplicationRecord
   validates :name, presence: true
   validates :description, presence: true
   has_one_attached :description
+  has_many :comments
 end

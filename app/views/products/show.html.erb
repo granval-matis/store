@@ -4,4 +4,22 @@
 
 <br/> <br/>
 
+
+<%= form_with(model: [@product, @product.comments.build], html: { class: "form-container" }) do |form| %>
+
+  <div class="container">
+    <%= form.text_area :content, class: "input" %>
+    <%= form.label :content, class: "label" %>
+  </div>
+
+  <br/>
+
+  <div>
+    <%= form.submit "Add a comment" %>
+  </div>
+
+<% end %>
+
+<br/> <br/>
+
 <%= link_to "Back", products_path %>

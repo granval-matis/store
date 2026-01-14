@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_secure_password
   has_many :sessions, dependent: :destroy
+  has_many :comments
   enum role: { guest: 0, buyer: 1, seller: 2, admin: 3 }
   after_initialize :set_default_role, if: :new_record?
   attr_readonly :admin
