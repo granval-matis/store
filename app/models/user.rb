@@ -2,7 +2,6 @@ class User < ApplicationRecord
   has_secure_password
   has_many :sessions, dependent: :destroy
   has_many :comments
-  enum role: { guest: 0, buyer: 1, seller: 2, admin: 3 }
   after_initialize :set_default_role, if: :new_record?
   attr_readonly :admin
 
@@ -11,6 +10,8 @@ class User < ApplicationRecord
   validates :first_name, :last_name, presence: true
 
   after_initialize :set_default_role, if: :new_record?
+
+  belongs_to :role, optional: true
 
   generates_token_for :email_confirmation, expires_in: 7.days do
     unconfirmed_email
@@ -39,6 +40,6 @@ class User < ApplicationRecord
   private
 
   def set_default_role
-    self.role ||= :buyer
+    self.role ||= Role.find_by(name: 'buyer')
   end
 end

@@ -39,6 +39,7 @@ class Store::ProductsController < Store::BaseController
       redirect_to store_products_path
     else
       redirect_to @product, alert: "You are not allowed to delete this product."
+    end
   end
 
   private

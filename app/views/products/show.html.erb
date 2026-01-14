@@ -22,4 +22,16 @@
 
 <br/> <br/>
 
+<p><%= @product.description %></p>
+
+<br/> <br/>
+
+<% @product.comments.includes(:user).each do |comment| %>
+  <p>
+    <%= comment.user&.first_name || "Deleted user" %>: <%= comment.content %>
+  </p>
+<% end %>
+
+<br/> <br/>
+
 <%= link_to "Back", products_path %>
