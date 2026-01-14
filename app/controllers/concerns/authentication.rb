@@ -12,9 +12,14 @@ module Authentication
     end
   end
 
-  def unauthenticated_access_only(**options)
-    allow_unauthenticated_access **options
-    before_action -> { redirect_to root_path if authenticated? }, **options
+  def allow_unauthenticated_access(**options)
+    skip_before_action :require_authentication, options
+  end
+
+  def require_role(*roles)
+    unless roles.include?(current_user.role.to_sym)
+      redirect_to root_path, alert: "You are not allow to access to this page."
+    end
   end
 
 
