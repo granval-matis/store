@@ -25,6 +25,14 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def admin?
+    role&.name == 'admin'
+  end
+
+  def seller?
+    role&.name == 'seller'
+  end
+
   def can_create_product?
     admin? || seller?
   end

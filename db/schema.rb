@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_01_14_183904) do
+ActiveRecord::Schema[8.0].define(version: 2026_01_14_184050) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -85,7 +85,9 @@ ActiveRecord::Schema[8.0].define(version: 2026_01_14_183904) do
     t.boolean "seller"
     t.boolean "buyer"
     t.integer "role"
+    t.integer "role_id", null: false
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
+    t.index ["role_id"], name: "index_users_on_role_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -93,4 +95,5 @@ ActiveRecord::Schema[8.0].define(version: 2026_01_14_183904) do
   add_foreign_key "comments", "products"
   add_foreign_key "comments", "users"
   add_foreign_key "sessions", "users"
+  add_foreign_key "users", "roles"
 end

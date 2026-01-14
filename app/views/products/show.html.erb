@@ -27,9 +27,7 @@
 <br/> <br/>
 
 <% @product.comments.includes(:user).each do |comment| %>
-  <p>
-    <%= comment.user&.first_name || "Deleted user" %>: <%= comment.content %>
-  </p>
+  <p><%= comment.user&.first_name || "Deleted user" %>: <%= comment.content %></p>
 <% end %>
 
 <br/> <br/>
