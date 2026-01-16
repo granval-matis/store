@@ -14,6 +14,13 @@
 
   <br/>
 
+  <div class="container">
+    <%= form.text_field :description, class: "input", required: true %>
+    <%= form.label :description, class: "label" %>
+  </div>
+
+  <br/>
+
   <div>
     <%= form.label :featured_image, class: "style_button" %>
     <%= form.file_field :featured_image, accept: "image/*", style: "display: none;" %>

@@ -20,14 +20,27 @@
 
 <% end %>
 
-<br/> <br/>
+<br/>
 
-<p><%= @product.description %></p>
+<p> <h2>Comments</h2> <%= @product.description %></p>
 
-<br/> <br/>
+<br/>
 
 <% @product.comments.includes(:user).each do |comment| %>
   <p><%= comment.user&.first_name || "Deleted user" %>: <%= comment.content %></p>
+<% end %>
+
+<% if authenticated? %>
+  <%= link_to "View in Storefront", @product %>
+
+  <br/> <br/>
+
+  <%= link_to "Edit", edit_store_product_path(@product) %>
+
+  <br/> <br/>
+
+  <%= button_to "Delete", [ :store, @product ], method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+
 <% end %>
 
 <br/> <br/>
