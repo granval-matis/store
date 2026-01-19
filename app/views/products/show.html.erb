@@ -22,13 +22,19 @@
 
 <br/>
 
-<p> <h2>Comments</h2> <%= @product.description %></p>
-
-<br/>
+<h2>Comments</h2>
 
 <% @product.comments.includes(:user).each do |comment| %>
   <p><%= comment.user&.first_name || "Deleted user" %>: <%= comment.content %></p>
 <% end %>
+
+<br/>
+
+<h2>Description</h2>
+
+<p><%= @product.description %></p>
+
+<br/>
 
 <% if authenticated? %>
   <%= link_to "View in Storefront", @product %>
@@ -45,4 +51,6 @@
 
 <br/> <br/>
 
-<%= link_to "Back", products_path %>
+<%= link_to store_products_path do %>
+  Back
+<% end %>

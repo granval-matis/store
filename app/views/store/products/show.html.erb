@@ -2,12 +2,16 @@
 
 <%= image_tag @product.featured_image if @product.featured_image.attached? %>
 
-<br/> <br/>
+<br/>
 
-<p><%= link_to "Back", store_products_path %></p>
+<p>
+  <%= link_to store_products_path do %>
+    Back
+  <% end %>
+</p>
 
 
-<br/> <br/>
+<br/>
 
 <% if authenticated? %>
   <%= link_to "View in Storefront", @product %>

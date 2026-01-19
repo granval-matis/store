@@ -9,7 +9,7 @@
     <div>
       <% if product.featured_image.attached? %>
         <h2> <%= product.name %> <%= number_to_currency(product.price_in_cents.to_f / 100, locale: :fr) %>  </h2>
-        <%= link_to product, store_product_path(product) do %>
+        <%= link_to store_product_path(product) do %>
 
           <%= image_tag product.featured_image, alt: product.name %>
         <% end %>
