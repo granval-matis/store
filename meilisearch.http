@@ -1,0 +1,19 @@
+### GET request to example server
+GET https://examples.http-client.intellij.net/get
+    ?generated-in=RubyMine
+###
+GET http://localhost:7700/indexes
+Content-Type: application/json
+Authorization: Bearer 22a1b5097d26d9d3217b124e01027e2b
+
+###
+
+GET http://localhost:7700/indexes/Product/documents
+Content-Type: application/json
+Authorization: Bearer 22a1b5097d26d9d3217b124e01027e2b
+
+{
+  "q": ""
+}
+
+###

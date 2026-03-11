@@ -55,6 +55,7 @@
     <orderEntry type="library" scope="PROVIDED" name="concurrent-ruby (v1.3.5, mise: 3.4.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="connection_pool (v2.5.4, mise: 3.4.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="crass (v1.0.6, mise: 3.4.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="csv (v3.3.2, mise: 3.4.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="date (v3.4.1, mise: 3.4.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="debug (v1.11.0, mise: 3.4.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="dotenv (v3.1.8, mise: 3.4.2) [gem]" level="application" />
@@ -65,6 +66,7 @@
     <orderEntry type="library" scope="PROVIDED" name="et-orbi (v1.3.0, mise: 3.4.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="fugit (v1.11.2, mise: 3.4.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="globalid (v1.2.1, mise: 3.4.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="httparty (v0.24.2, mise: 3.4.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="i18n (v1.14.7, mise: 3.4.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="importmap-rails (v2.2.2, mise: 3.4.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="io-console (v0.8.1, mise: 3.4.2) [gem]" level="application" />
@@ -79,9 +81,13 @@
     <orderEntry type="library" scope="PROVIDED" name="mail (v2.8.1, mise: 3.4.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="marcel (v1.0.4, mise: 3.4.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="matrix (v0.4.3, mise: 3.4.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="meilisearch (v0.32.0, mise: 3.4.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="meilisearch-rails (v0.16.0, mise: 3.4.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="mini_mime (v1.1.5, mise: 3.4.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="minitest (v5.25.5, mise: 3.4.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="msgpack (v1.8.0, mise: 3.4.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="multi_xml (v0.8.1, mise: 3.4.2) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="mutex_m (v0.3.0, mise: 3.4.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="net-imap (v0.5.10, mise: 3.4.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="net-pop (v0.1.2, mise: 3.4.2) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="net-protocol (v0.2.2, mise: 3.4.2) [gem]" level="application" />

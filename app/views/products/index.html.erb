@@ -1,21 +1,53 @@
+<!--<h1>Products</h1>-->
+
+<!--<br/>-->
+
+<!--<div id="products" style="display: flex; flex-wrap: wrap; gap: 40px;">-->
+  <%# @products.each do |product| %>
+<!--    <div>-->
+      <%# if product.featured_image.attached? %>
+<!--        <h2> <%#= product.name %> <%#= number_to_currency(product.price_in_cents.to_f / 100, locale: :fr) %>  </h2>-->
+        <%#= link_to product do %>
+          <%#= image_tag product.featured_image, alt: product.name %>
+        <%# end %>
+      <%# else %>
+        <%#= link_to product.name, product %>
+      <%# end %>
+
+<!--      <br/> <br/>-->
+
+<!--    </div>-->
+  <%# end %>
+<!--</div>-->
+
 <h1>Products</h1>
 
-<br/>
+<%= form_with html: { class: "form-container" }, method: :get, local: true do |form| %>
+  <%= text_field_tag :q, params[:q], placeholder: "Search...", class: "input" %>
+  <%= submit_tag "Search" %>
+<% end %>
 
-<div id="products" style="display: flex; flex-wrap: wrap; gap: 40px;">
-  <% @products.each do |product| %>
-    <div>
-      <% if product.featured_image.attached? %>
-        <h2> <%= product.name %> <%= number_to_currency(product.price_in_cents.to_f / 100, locale: :fr) %>  </h2>
-        <%= link_to product do %>
-          <%= image_tag product.featured_image, alt: product.name %>
-        <% end %>
-      <% else %>
-        <%= link_to product.name, product %>
-      <% end %>
 
-      <br/> <br/>
+<% multi_search_results = Meilisearch::Rails.multi_search(
+  Product => { q: params[:q] }
+) %>
 
-    </div>
-  <% end %>
-</div>
+<% multi_search_results.each_result do |klass, results| %>
+<!--  <h2><%#= klass.name.pluralize %></h2>-->
+    <br/>
+    <div id="products" style="display: flex; flex-wrap: wrap; gap: 40px;">
+      <% results.each do |record| %>
+        <div>
+          <% if record.featured_image.attached? %>
+            <h2> <%= record.name %> <%= number_to_currency(record.price_in_cents.to_f / 100, locale: :fr) %>  </h2>
+            <%= link_to record do %>
+              <%= image_tag record.featured_image, alt: record.name %>
+            <% end %>
+          <% else %>
+            <%= link_to record.name, record %>
+          <% end %>
+          <br/> <br/>
+        </div>
+    <% end %>
+  </div>
+<% end %>
