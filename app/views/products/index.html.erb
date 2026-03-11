@@ -2,8 +2,15 @@
 
 <%= form_with html: { class: "form-container" }, method: :get, local: true do |form| %>
   <div class="container">
-    <%= form.text_field :q, class: "input", required: true %>
+    <%= form.text_field :search, class: "input", required: true, value: params[:search] %>
     <%= form.label :search, class: "label" %>
+  </div>
+
+  <br/> <br/>
+
+  <div class="container">
+    <%= form.number_field :max_price, class: "input", required: true, value: params[:max_price] %>
+    <%= form.label :max_price, class: "label" %>
   </div>
 
   <br/>
@@ -21,34 +28,19 @@
   </div>
 <% end %>
 
-<% if params[:tata] == '1' %>
-  <% multi_search_results = Meilisearch::Rails.multi_search(
-    Product => { q: "tata" }
-  ) %>
-<% else %>
-  <% multi_search_results = Meilisearch::Rails.multi_search(
-    Product => { q: params[:q] }
-  ) %>
-<% end %>
-
-
-
-<% multi_search_results.each_result do |klass, results| %>
-<!--  <h2><%#= klass.name.pluralize %></h2>-->
-    <br/>
-    <div id="products" style="display: flex; flex-wrap: wrap; gap: 40px;">
-      <% results.each do |record| %>
-        <div>
-          <% if record.featured_image.attached? %>
-            <h2><%= record.name %> <%= number_to_currency(record.price_in_cents.to_f / 100, locale: :fr) %></h2>
-            <%= link_to record do %>
-              <%= image_tag record.featured_image, alt: record.name %>
-            <% end %>
-          <% else %>
-            <%= link_to record.name, record %>
-          <% end %>
-          <br/> <br/>
-        </div>
-    <% end %>
-  </div>
-<% end %>
+<br/>
+<div id="products" style="display: flex; flex-wrap: wrap; gap: 40px;">
+  <% @search_results.each do |record| %>
+    <div>
+      <% if record.featured_image.attached? %>
+        <h2><%= record.name %> <%= number_to_currency(record.price_in_cents.to_f / 100, locale: :fr) %></h2>
+        <%= link_to record do %>
+          <%= image_tag record.featured_image, alt: record.name %>
+        <% end %>
+      <% else %>
+        <%= link_to record.name, record %>
+      <% end %>
+      <br/> <br/>
+    </div>
+  <% end %>
+</div>
