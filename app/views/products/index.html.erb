@@ -1,13 +1,24 @@
 <h1>Products</h1>
 
 <%= form_with html: { class: "form-container" }, method: :get, local: true do |form| %>
-  <%= text_field_tag :q, params[:q], placeholder: "Search...", class: "input" %>
-  <%= submit_tag "Search" %>
+  <div class="container">
+    <%= form.text_field :q, class: "input", required: true %>
+    <%= form.label :search, class: "label" %>
+  </div>
+
+  <br/>
+
+  <label>
+    <%= check_box_tag :tata, '1', params[:tata] == '1', class: "input" %>
+    <span class="custom-checkbox"></span>
+    tata
+  </label>
 
   <br/> <br/>
 
-  <%= check_box_tag(:tata, '1', params[:tata] == '1') %>
-  <%= label_tag(:tata, "tata") %>
+  <div>
+    <%= form.submit :Search %>
+  </div>
 <% end %>
 
 <% if params[:tata] == '1' %>
