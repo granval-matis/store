@@ -4,7 +4,7 @@ class Product < ApplicationRecord
   validates :name, presence: true
   validates :description, presence: true
   has_many :comments
-  attribute :metadata, :jsonb
+  attribute :metadata, :json
 
   include Meilisearch::Rails
 
