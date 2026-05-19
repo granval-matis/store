@@ -1,46 +1,62 @@
-<h1>Products</h1>
+<div id="grid">
+  <div id="left">
+    <h1>Products</h1>
 
-<%= form_with html: { class: "form-container" }, method: :get, local: true do |form| %>
-  <div class="container">
-    <%= form.text_field :search, class: "input", required: true, value: params[:search] %>
-    <%= form.label :search, class: "label" %>
-  </div>
+    <br/>
 
-  <br/> <br/>
+    <%= form_with html: { class: "form-container" }, method: :get, local: true do |form| %>
+      <div class="container">
+        <%= form.text_field :search, class: "input", value: params[:search] %>
+        <%= form.label :search, class: "label" %>
+      </div>
 
-  <div class="container">
-    <%= form.number_field :max_price, class: "input", required: true, value: params[:max_price] %>
-    <%= form.label :max_price, class: "label" %>
-  </div>
-
-  <br/>
-
-  <label>
-    <%= check_box_tag :tata, '1', params[:tata] == '1', class: "input" %>
-    <span class="custom-checkbox"></span>
-    tata
-  </label>
-
-  <br/> <br/>
-
-  <div>
-    <%= form.submit :Search %>
-  </div>
-<% end %>
-
-<br/>
-<div id="products" style="display: flex; flex-wrap: wrap; gap: 40px;">
-  <% @search_results.each do |record| %>
-    <div>
-      <% if record.featured_image.attached? %>
-        <h2><%= record.name %> <%= number_to_currency(record.price_in_cents.to_f / 100, locale: :fr) %></h2>
-        <%= link_to record do %>
-          <%= image_tag record.featured_image, alt: record.name %>
-        <% end %>
-      <% else %>
-        <%= link_to record.name, record %>
-      <% end %>
       <br/> <br/>
+
+      <div class="container">
+        <%= form.number_field :max_price, class: "input", value: params[:max_price] %>
+        <%= form.label :max_price, class: "label" %>
+      </div>
+
+      <br/>
+
+      <div class="container">
+        <% colors = Array.new(1000) { Faker::Color.color_name }.uniq.sort %>
+        <%= form.select :color, options_for_select(colors), class: "input", value: params[:color], include_blank: true %>
+        <%= form.label :color, class: "label" %>
+
+      </div>
+
+      <br/>
+
+      <label>
+        <%= check_box_tag :tata, '1', params[:tata] == '1', class: "input" %>
+        <span class="custom-checkbox"></span>
+        tata
+      </label>
+
+      <br/> <br/>
+
+      <div>
+        <%= form.submit :Search %>
+      </div>
+    <% end %>
+  </div>
+
+  <div id="right">
+    <div id="products" style="display: flex; flex-wrap: wrap; gap: 40px;">
+      <% @search_results.each do |record| %>
+        <div>
+          <% if record.featured_image.attached? %>
+            <h2><%= record.name %> <%= number_to_currency(record.price_in_cents.to_f / 100, locale: :fr) %></h2>
+            <%= link_to record do %>
+              <%= image_tag record.featured_image, alt: record.name %>
+            <% end %>
+          <% else %>
+            <%= link_to "#{record.name} - #{number_to_currency(record.price_in_cents.to_f / 100, locale: :fr)}", record %>
+          <% end %>
+          <br/> <br/>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+  </div>
 </div>
