@@ -1,6 +1,6 @@
 <div id="grid">
   <div id="left">
-    <h1>Products</h1>
+    <h1>Filters</h1>
 
     <br/>
 
@@ -17,21 +17,65 @@
         <%= form.label :max_price, class: "label" %>
       </div>
 
+      <br/> <br/>
+
+
+      <div class="container">
+        <%= form.number_field :weight, class: "input", value: params[:weight] %>
+        <%= form.label :weight, class: "label" %>
+      </div>
+
+      <br/> <br/>
+
+      <div class="container">
+        <%= form.number_field :size, class: "input", value: params[:size] %>
+        <%= form.label :size, class: "label" %>
+      </div>
+
       <br/>
 
       <div class="container">
-        <% colors = Array.new(1000) { Faker::Color.color_name }.uniq.sort %>
-        <%= form.select :color, options_for_select(colors), class: "input", value: params[:color], include_blank: true %>
-        <%= form.label :color, class: "label" %>
+        <% lists = {
+          color: Array.new(1000) { Faker::Color.color_name }.uniq.sort,
+          material: Array.new(1000) { Faker::Construction.material }.uniq.sort,
+          company: Array.new(1000) { Faker::Company.name }.uniq.sort,
+          country: Array.new(1000) { Faker::Address.country }.uniq.sort,
+          ingredient: Array.new(1000) { Faker::Food.ingredient }.uniq.sort
+        } %>
 
+        <% lists.each do |key, items| %>
+          <div class="checkbox_wrapper" id="<%= "#{key}_wrapper" %>">
+            <div class="checkbox_title">
+              <button type="button"><%= key.to_s.capitalize %> ▾</button>
+            </div>
+            <div class="checkboxes">
+              <% items.each do |item| %>
+                <label>
+                  <%= check_box_tag "model[#{key}][]", item, Array(params[key]).include?(item), class: "input", id: "#{key}_#{item.parameterize}" %>
+                  <span class="custom-checkbox"></span>
+                  <%= item %>
+                </label>
+                <br/>
+              <% end %>
+            </div>
+          </div>
+          <br/> <br/>
+        <% end %>
+      </div>
+
+      <br/> <br/>
+
+      <div class="container">
+        <%= form.number_field :brightness, class: "input", value: params[:brightness] %>
+        <%= form.label :brightness, class: "label" %>
       </div>
 
       <br/>
 
       <label>
-        <%= check_box_tag :tata, '1', params[:tata] == '1', class: "input" %>
+        <%= check_box_tag :waterproof, '1', params[:waterproof] == '1', class: "input" %>
         <span class="custom-checkbox"></span>
-        tata
+        waterproof
       </label>
 
       <br/> <br/>
@@ -43,6 +87,8 @@
   </div>
 
   <div id="right">
+    <h1>Products</h1>
+
     <div id="products" style="display: flex; flex-wrap: wrap; gap: 40px;">
       <% @search_results.each do |record| %>
         <div>
@@ -60,3 +106,19 @@
     </div>
   </div>
 </div>
+
+<script>
+    document.querySelectorAll('.checkbox_title button').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const parent = btn.closest('.checkbox_wrapper');
+            const checkboxes = parent.querySelectorAll('.checkboxes');
+            const current = parseInt(getComputedStyle(parent).height, 10);
+            const collapsed = current > 52;
+            parent.style.height = (collapsed ? 52 : 320) + 'px';
+            checkboxes.forEach(cb => {
+                cb.style.display = (collapsed ? 'none' : 'block');
+            });
+        });
+    });
+
+</script>
