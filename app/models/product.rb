@@ -10,7 +10,7 @@ class Product < ApplicationRecord
 
   meilisearch do
     searchable_attributes [:name, :description]
-    filterable_attributes [:price_in_cents]
+    filterable_attributes [:price_in_cents, :metadata]
     sortable_attributes [:name, :description]
     ranking_rules [
                     'proximity',

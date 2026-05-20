@@ -35,7 +35,7 @@
       <br/>
 
       <div class="container">
-        <% lists = {
+        <% attributes = {
           color: Array.new(1000) { Faker::Color.color_name }.uniq.sort,
           material: Array.new(1000) { Faker::Construction.material }.uniq.sort,
           company: Array.new(1000) { Faker::Company.name }.uniq.sort,
@@ -43,21 +43,21 @@
           ingredient: Array.new(1000) { Faker::Food.ingredient }.uniq.sort
         } %>
 
-        <% lists.each do |key, items| %>
-          <div class="checkbox_wrapper" id="<%= "#{key}_wrapper" %>">
-            <div class="checkbox_title">
-              <button type="button"><%= key.to_s.capitalize %> ▾</button>
-            </div>
-            <div class="checkboxes">
-              <% items.each do |item| %>
-                <label>
-                  <%= check_box_tag "model[#{key}][]", item, Array(params[key]).include?(item), class: "input", id: "#{key}_#{item.parameterize}" %>
-                  <span class="custom-checkbox"></span>
-                  <%= item %>
-                </label>
-                <br/>
-              <% end %>
-            </div>
+        <% attributes.each do |key, items| %>
+          <div class="input" id="checkboxes">
+            <details>
+              <summary><%= key.capitalize %></summary>
+              <div class="labels">
+                <% items.each do |item| %>
+                  <label>
+                    <%= check_box_tag "#{key}[]", item, class: "input" %>
+                    <span class="custom-checkbox"></span>
+                    <%= item %>
+                  </label>
+                  <br/>
+                <% end %>
+              </div>
+            </details>
           </div>
           <br/> <br/>
         <% end %>
@@ -106,19 +106,3 @@
     </div>
   </div>
 </div>
-
-<script>
-    document.querySelectorAll('.checkbox_title button').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const parent = btn.closest('.checkbox_wrapper');
-            const checkboxes = parent.querySelectorAll('.checkboxes');
-            const current = parseInt(getComputedStyle(parent).height, 10);
-            const collapsed = current > 52;
-            parent.style.height = (collapsed ? 52 : 320) + 'px';
-            checkboxes.forEach(cb => {
-                cb.style.display = (collapsed ? 'none' : 'block');
-            });
-        });
-    });
-
-</script>

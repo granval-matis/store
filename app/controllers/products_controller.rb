@@ -3,18 +3,23 @@ class ProductsController < ApplicationController
 
   def index
     @products = Product.all
-    if params[:tata] == '1'
-      @search_results = Product.search("tata")
-    elsif (params[:search] == '') && (params[:max_price].to_i < 1)
-      @search_results = Product.all
-    elsif params[:search] == ''
-      @search_results = Product.search({ filter: "price_in_cents <= #{params[:max_price].to_f * 100}"})
-    elsif params[:max_price].to_i < 1
-      @search_results = Product.search(params[:search])
-    else
-      @search_results = Product.search(params[:search], { filter: "price_in_cents <= #{params[:max_price].to_f * 100}"})
+    @search_results = Product.all
+
+    filters = []
+
+    if params[:max_price].to_i > 0
+      filters << "price_in_cents <= #{params[:max_price].to_f * 100}"
     end
 
+    if params[:weight].to_i > 0
+      filters << "weight <= #{params[:weight]}"
+    end
+
+    if params[:search] == ""
+      @search_results = Product.search(filters: filters.join(' AND '))
+    else
+      @search_results = Product.search(params[:search], filters: filters.join(' AND '))
+    end
 
   end
 

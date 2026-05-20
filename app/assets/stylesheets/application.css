@@ -202,42 +202,27 @@ nav form button {
     padding: 32px;
 }
 
-.checkbox_wrapper {
+#checkboxes {
     box-sizing: border-box;
     font-size: 18px;
     width: 234px;
-    height: 52px;
+    height: auto;
+    min-height: 58px;
+    max-height: 320px;
     line-height: 45px;
-    border: 2px solid #2c2c2c;
-    outline: none;
-    padding: 4px 16px 12px 16px;
-    border-radius: 20px;
-    color: #dddddd;
-    background-color: transparent;
-    box-shadow:  -3px -3px 6px #101010, 3px 3px 6px #505050;
-    transition:  all 0.2s ease-in-out;
 }
-.checkbox_title {
-    position: absolute;
+
+summary {
+    position: sticky;
     height: 16%;
     z-index: 2;
-}
-
-.checkbox_title button {
-    all: unset;
-    display: inline;
-    cursor: pointer;
-    font: inherit;
-    color: inherit;
-    line-height: 100%;
-    width: 100%;
-    text-align: center;
-}
-
-.checkboxes {
-    display: none;
-    position: relative;
-    top: 16%;
-    height: 84%;
     overflow: auto;
+
 }
+
+.labels {
+    height : 272px;
+    overflow: auto;
+
+}
+
