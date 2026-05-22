@@ -33,3 +33,5 @@
 /config/master.key
 
 /bin/meilisearch
+
+/data.ms
