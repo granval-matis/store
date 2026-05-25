@@ -1,4 +1,4 @@
-class Settings::ProfilesController < Settings::BaseController
+class Settings::PasswordsController < Settings::BaseController
 def show
   end
 
