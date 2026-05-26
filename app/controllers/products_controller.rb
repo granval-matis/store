@@ -48,12 +48,12 @@ class ProductsController < ApplicationController
       filters << "(metadata.waterproof == true OR metadata.waterproof IS NULL)"
     end
 
-      if params[:search].blank?
-        @search_results = Product.search("*", filter: filters.join(" AND "))
-      else
-        @search_results = Product.search(params[:search], filter: filters.join(" AND "))
-      end
+    if params[:search].blank?
+      @search_results = Product.search("*", filter: filters.join(" AND "))
+    else
+      @search_results = Product.search(params[:search], filter: filters.join(" AND "))
     end
+  end
 
   def show
     @product = Product.find(params[:id])
