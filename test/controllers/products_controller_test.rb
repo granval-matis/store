@@ -33,7 +33,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should filter by color" do
-    get products_url, params: { color: "amaranth" }
+    get products_url, params: { color: "[amaranth]" }
     assert_response :success
     assert assigns(:search_results).all? { |p| p.metadata[:color] == "amaranth" }
   end
@@ -45,25 +45,25 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should filter by material" do
-    get products_url, params: { material: "Aluminum" }
+    get products_url, params: { material: "[Aluminum]" }
     assert_response :success
     assert assigns(:search_results).all? { |p| p.metadata[material] == "Aluminum" }
   end
 
   test "should filter by brand" do
-    get products_url, params: { brand: "Abshire Inc" }
+    get products_url, params: { brand: "[Abshire Inc]" }
     assert_response :success
     assert assigns(:search_results).all? { |p| p.metadata[:brand] == "Abshire Inc" }
   end
 
   test "should filter by origin" do
-    get products_url, params: { origin: "France" }
+    get products_url, params: { origin: "[France]" }
     assert_response :success
     assert assigns(:search_results).all? { |p| p.metadata[:origin] == "France" }
   end
 
   test "should filter by fragrance" do
-    get products_url, params: { fragrance: "Achacha" }
+    get products_url, params: { fragrance: "[Achacha]" }
     assert_response :success
     assert assigns(:search_results).all? { |p| p.metadata[:fragrance] == "Achacha" }
   end
