@@ -25,6 +25,7 @@ jobs:
         with:
           push: true
           tags: ghcr.io/granval-matis/store:latest
+
   scan_ruby:
     runs-on: ubuntu-latest
 
@@ -74,8 +75,14 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
+    services:
+      meilisearch:
+        image: getmeili/meilisearch:v1.44.0
+        ports:
+          - 7700:7700
+        environment:
+          - MEILI_MASTER_KEY=22a1b5097d26d9d3217b124e01027e2b
 
-    # services:
     #  redis:
     #    image: redis
     #    ports:
