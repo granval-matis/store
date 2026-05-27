@@ -81,7 +81,7 @@ jobs:
         ports:
           - 7700:7700
         env:
-          MEILI_MASTER_KEY: 22a1b5097d26d9d3217b124e01027e2b
+          MEILI_MASTER_KEY: test_key
     #  redis:
     #    image: redis
     #    ports:
@@ -103,7 +103,6 @@ jobs:
       - name: Run tests
         env:
           RAILS_ENV: test
-          MEILISEARCH_HOST: http://meilisearch:7700
 
           # REDIS_URL: redis://localhost:6379/0
         run: bin/rails db:test:prepare test test:system
