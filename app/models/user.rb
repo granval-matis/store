@@ -18,7 +18,8 @@ class User < ApplicationRecord
   end
 
   def current_user
-    @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+    return unless session[:user_id]
+    @current_user ||= User.find(session[:user_id])
   end
 
   def confirm_email
@@ -30,12 +31,13 @@ class User < ApplicationRecord
   end
 
   def admin?
-    role&.name == 'admin'
+    role.present? && role.name == 'admin'
   end
 
   def seller?
-    role&.name == 'seller'
+    role.present? && role.name == 'seller'
   end
+
 
   def can_create_product?
     admin? || seller?

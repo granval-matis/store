@@ -1,11 +1,6 @@
 class Store::ProductsController < Store::BaseController
   before_action :set_product, only: %i[ show edit update destroy ]
 
-  def current_user
-    return unless session[:user_id]
-    @current_user ||= User.find(session[:user_id])
-  end
-
   def index
     @products = Product.all
   end

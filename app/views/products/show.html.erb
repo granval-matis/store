@@ -35,8 +35,20 @@
 <p><%= @product.description %></p>
 
 <br/>
+<% if @product.metadata.present? %>
+  <h2>Features</h2>
 
-<% if authenticated? %>
+  <p>
+    <% @product.metadata.each do |key, value| %>
+      <% unless value.blank? %>
+        <%= key %>: <%= value %> <br>
+      <% end %>
+    <% end %>
+  </p>
+<% end %>
+<br/>
+
+<% if authenticated?  && (current_user&.admin? || current_user&.seller?) %>
   <%= link_to "View in Storefront", @product %>
 
   <br/> <br/>
@@ -51,6 +63,6 @@
 
 <br/> <br/>
 
-<%= link_to store_products_path do %>
+<%= link_to products_path do %>
   Back
 <% end %>
