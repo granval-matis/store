@@ -1,68 +1,70 @@
-<h1><%= @product.name %></h1>
+<div style="padding-left: 80px;padding-right: 80px;">
+  <h1><%= @product.name %></h1>
 
-<%= image_tag @product.featured_image if @product.featured_image.attached? %>
+  <%= image_tag @product.featured_image if @product.featured_image.attached? %>
 
-<br/> <br/>
+  <br/> <br/>
 
 
-<%= form_with(model: [@product, @product.comments.build], html: { class: "form-container" }) do |form| %>
+  <%= form_with(model: [@product, @product.comments.build], html: { class: "form-container" }) do |form| %>
 
-  <div class="container">
-    <%= form.text_area :content, class: "input" %>
-    <%= form.label :content, class: "label" %>
-  </div>
+    <div class="container">
+      <%= form.text_area :content, class: "input" %>
+      <%= form.label :content, class: "label" %>
+    </div>
+
+    <br/>
+
+    <div>
+      <%= form.submit "Add a comment" %>
+    </div>
+
+  <% end %>
 
   <br/>
 
-  <div>
-    <%= form.submit "Add a comment" %>
-  </div>
+  <h2>Comments</h2>
 
-<% end %>
+  <% @product.comments.includes(:user).each do |comment| %>
+    <p><%= comment.user&.first_name || "Deleted user" %>: <%= comment.content %></p>
+  <% end %>
 
-<br/>
+  <br/>
 
-<h2>Comments</h2>
+  <h2>Description</h2>
 
-<% @product.comments.includes(:user).each do |comment| %>
-  <p><%= comment.user&.first_name || "Deleted user" %>: <%= comment.content %></p>
-<% end %>
+  <p><%= @product.description %></p>
 
-<br/>
+  <br/>
+  <% if @product.metadata.present? %>
+    <h2>Features</h2>
 
-<h2>Description</h2>
-
-<p><%= @product.description %></p>
-
-<br/>
-<% if @product.metadata.present? %>
-  <h2>Features</h2>
-
-  <p>
-    <% @product.metadata.each do |key, value| %>
-      <% unless value.blank? %>
-        <%= key %>: <%= value %> <br>
+    <p>
+      <% @product.metadata.each do |key, value| %>
+        <% unless value.blank? %>
+          <%= key %>: <%= value %> <br>
+        <% end %>
       <% end %>
-    <% end %>
-  </p>
-<% end %>
-<br/>
+    </p>
+  <% end %>
+  <br/>
 
-<% if authenticated?  && (current_user&.admin? || current_user&.seller?) %>
-  <%= link_to "View in Storefront", @product %>
+  <% if authenticated?  && (current_user&.admin? || current_user&.seller?) %>
+    <%= link_to "View in Storefront", @product %>
+
+    <br/> <br/>
+
+    <%= link_to "Edit", edit_store_product_path(@product) %>
+
+    <br/> <br/>
+
+    <%= button_to "Delete", [ :store, @product ], method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+
+  <% end %>
 
   <br/> <br/>
 
-  <%= link_to "Edit", edit_store_product_path(@product) %>
-
-  <br/> <br/>
-
-  <%= button_to "Delete", [ :store, @product ], method: :delete, data: { turbo_confirm: "Are you sure?" } %>
-
-<% end %>
-
-<br/> <br/>
-
-<%= link_to products_path do %>
-  Back
-<% end %>
+  <%= link_to products_path do %>
+    Back
+  <% end %>
+</div>

@@ -75,7 +75,15 @@
       <label>
         <%= check_box_tag :waterproof, '1', params[:waterproof] == '1', class: "input" %>
         <span class="custom-checkbox"></span>
-        waterproof
+        Waterproof
+      </label>
+
+      <br/> <br/>
+
+      <label>
+        <%= check_box_tag :restrictive_search, '1', params[:restrictive_search] == '1', class: "input" %>
+        <span class="custom-checkbox"></span>
+        Restrictive search
       </label>
 
       <br/> <br/>

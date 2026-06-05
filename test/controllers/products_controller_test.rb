@@ -77,6 +77,6 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
   test "should filter by waterproof" do
     get products_url, params: { waterproof: 1 }
     assert_response :success
-    assert assigns(:search_results).all? { |p| p.metadata[:waterproof].nil? || p.metadata[:waterproof] == true }
+    assert assigns(:search_results).all? { |p| p.metadata[:waterproof].nil? || p.metadata[:waterproof] }
   end
 end

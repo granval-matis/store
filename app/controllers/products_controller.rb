@@ -11,41 +11,42 @@ class ProductsController < ApplicationController
       filters << "price_in_cents <= #{params[:max_price].to_f * 100}"
     end
 
-    if params[:weight].to_i > 0 && not params[:weight].blank?
-      filters << "(metadata.weight <= #{params[:weight]} OR metadata.weight IS NULL)"
+    metadata_quantities = { weight: "weight",
+                            size: "size",
+                            brightness: "brightness" }
 
+    metadata_attributes = { color: "color",
+                 material: "material",
+                 company: "brand",
+                 country: "origin",
+                 ingredient: "fragrance" }
+
+    metadata_quantities.each do |key, value|
+      if params[key].to_i > 0
+        if params[:restrictive_search] == "1"
+          filters << "(metadata.#{value} <= #{params[key]} AND metadata.#{value} IS NOT NULL)"
+        else
+          filters << "(metadata.#{value} <= #{params[key]} OR metadata.#{value} IS NULL)"
+        end
+      end
     end
 
-    if params[:size].to_i > 0 && not params[:size].blank?
-      filters << "(metadata.size <= #{params[:size]} OR metadata.size IS NULL)"
+    metadata_attributes.each do |key, value|
+      if params[key].present?
+        if params[:restrictive_search] == "1"
+          filters << "(metadata.#{value} IN #{params[key]} AND metadata.#{value} IS NOT NULL)"
+        else
+          filters << "(metadata.#{value} IN #{params[key]} OR metadata.#{value} IS NULL)"
+        end
+      end
     end
 
-    if params[:color].present?
-      filters << "(metadata.color IN #{params[:color]} OR metadata.color IS NULL)"
-    end
-
-    if params[:material].present?
-      filters << "(metadata.material IN #{params[:material]} OR metadata.material IS NULL)"
-    end
-
-    if params[:company].present?
-      filters << "(metadata.brand IN #{params[:company]} OR metadata.brand IS NULL)"
-    end
-
-    if params[:country].present?
-      filters << "(metadata.origin IN #{params[:country]} OR metadata.origin IS NULL)"
-    end
-
-    if params[:ingredient].present?
-      filters << "(metadata.fragrance IN #{params[:ingredient]} OR metadata.fragrance IS NULL)"
-    end
-
-    if params[:brightness].to_i > 0 && not params[:brightness].blank?
-      filters << "(metadata.brightness <= #{params[:brightness]} OR metadata.brightness IS NULL)"
-    end
-
-    if params[:waterproof] == 1
-      filters << "(metadata.waterproof == true OR metadata.waterproof IS NULL)"
+    if params[:waterproof] == "1"
+      if params[:restrictive_search] == "1"
+        filters << "(metadata.waterproof = true AND metadata.waterproof IS NOT NULL)"
+      else
+        filters << "(metadata.waterproof = true OR metadata.waterproof IS NULL)"
+      end
     end
 
     if params[:search].blank?
