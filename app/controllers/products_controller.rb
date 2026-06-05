@@ -50,9 +50,9 @@ class ProductsController < ApplicationController
     end
 
     if params[:search].blank?
-      @search_results = Product.search("*", filter: filters.join(" AND "))
+      @search_results = Product.search("*", page: params[:page] || 1,  filter: filters.join(" AND "), hits_per_page: 20 )
     else
-      @search_results = Product.search(params[:search], filter: filters.join(" AND "))
+      @search_results = Product.search(params[:search], page: params[:page] || 1,  filter: filters.join(" AND "), hits_per_page: 20 )
     end
   end
 

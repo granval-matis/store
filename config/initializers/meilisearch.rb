@@ -1,4 +1,5 @@
 Meilisearch::Rails.configuration = {
   meilisearch_url: ENV.fetch('MEILISEARCH_HOST', 'http://localhost:7700'),
-  meilisearch_api_key: ENV.fetch('MEILISEARCH_API_KEY', '22a1b5097d26d9d3217b124e01027e2b')
+  meilisearch_api_key: ENV.fetch('MEILISEARCH_API_KEY', '22a1b5097d26d9d3217b124e01027e2b'),
+  pagination_backend: :kaminari
 }

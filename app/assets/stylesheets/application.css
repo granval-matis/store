@@ -4,7 +4,7 @@ body {
     font-size: 18px;
     color: #dddddd;
     background-color: #303030;
-    margin: 0px;
+    margin: 0;
     height: 100%;
 }
 a:not(:has(img)), a img, button, input, .style_button, select {
