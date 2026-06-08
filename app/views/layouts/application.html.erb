@@ -24,7 +24,6 @@
 
     <nav>
       <% unless controller_name == "settings" && action_name.in?(["profile", "email", "password", "user"]) %>
-        <%= link_to "Home", root_path %>
         <%= link_to "Products", products_path %>
         <% if authenticated? %>
           <%= link_to "Settings", settings_root_path %>

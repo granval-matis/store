@@ -45,7 +45,7 @@
 
         <% attributes.each do |key, items| %>
           <div class="input" id="checkboxes">
-            <details>
+            <details <%= 'open' if params[key].present? %>>
               <summary><%= key.capitalize %></summary>
               <div class="labels">
                 <% items.each do |item| %>
