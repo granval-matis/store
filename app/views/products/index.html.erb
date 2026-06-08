@@ -50,7 +50,7 @@
               <div class="labels">
                 <% items.each do |item| %>
                   <label>
-                    <%= check_box_tag "#{key}[]", item, class: "input" %>
+                    <%= check_box_tag "#{key}[]", item, params[key]&.include?(item.to_s), class: "input" %>
                     <span class="custom-checkbox"></span>
                     <%= item %>
                   </label>
